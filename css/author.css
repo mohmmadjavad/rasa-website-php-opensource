@@ -1,0 +1,668 @@
+/* =========================================================
+   author.css — چیدمان تمیز بدون بج + شبکه اجتماعی هوشمند در موبایل
+   ========================================================= */
+
+.author-page {
+  min-height: 80vh;
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.author-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------------------------------------------------------
+   بارگذاری / یافت‌نشد
+--------------------------------------------------------- */
+.author-loading, .author-not-found {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 6rem 1rem; color: var(--c-deep);
+}
+.loading-spinner {
+  width: 42px; height: 42px; border-radius: 50%;
+  border: 3px solid rgba(12, 141, 141, .18); border-top-color: var(--c-teal);
+  animation: authorSpin .8s linear infinite; margin-bottom: 1rem;
+}
+@keyframes authorSpin { to { transform: rotate(360deg); } }
+.author-not-found svg { width: 52px; height: 52px; opacity: .4; margin-bottom: 1rem; }
+.author-not-found h1 { color: var(--c-ink); font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 .5rem; }
+.author-not-found p { margin: 0 0 1.4rem; opacity: .7; font-size: .95rem; }
+
+/* ---------------------------------------------------------
+   ساختار پایه
+--------------------------------------------------------- */
+.author-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.author-sidebar, .author-main-content {
+  width: 100%;
+}
+
+.author-profile-card {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------
+   هدر پروفایل موبایل
+--------------------------------------------------------- */
+.author-profile-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+.author-avatar-square {
+  width: 90px;
+  height: 90px;
+  border-radius: 22px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--c-teal), var(--c-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px -6px rgba(18, 84, 84, 0.3);
+}
+.author-avatar-square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.author-avatar-square span {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.author-meta-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  gap: 0.9rem;
+}
+
+.author-name-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.author-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+  font-weight: 900;
+  color: var(--c-ink);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.author-stats-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+.stat-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 14px;
+  padding: 0.5rem 0.3rem;
+}
+
+.stat-col:nth-child(1), .stat-col:nth-child(2) {
+  width: 50%;
+}
+
+.stat-col:nth-child(1) { background: rgba(12, 141, 141, 0.08); }
+.stat-col:nth-child(2) { background: rgba(123, 254, 255, 0.14); }
+
+.stat-count {
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--c-ink);
+  line-height: 1;
+}
+
+.stat-col:nth-child(1) .stat-count { color: var(--c-teal); }
+.stat-col:nth-child(2) .stat-count { color: var(--c-deep); }
+
+.stat-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-deep);
+  opacity: 0.8;
+  margin-top: 0.3rem;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   بیوگرافی و شبکه‌های اجتماعی هوشمند
+--------------------------------------------------------- */
+.author-bio-section {
+  margin-bottom: 1.2rem;
+}
+
+.author-role {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--c-teal);
+  margin-bottom: 0.3rem;
+}
+
+.author-bio {
+  font-size: 0.9rem;
+  color: var(--c-ink);
+  line-height: 1.65;
+  margin: 0;
+  white-space: pre-line;
+}
+
+/* کارت‌های شبکه اجتماعی انعطاف‌پذیر و هوشمند */
+.author-social-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.author-social-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(12, 141, 141, 0.08);
+  color: var(--c-deep);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex: 1 1 auto; /* پر کردن هوشمند فضای خالی ردیف */
+  text-align: center;
+}
+
+.author-social-tag:hover {
+  background: rgba(12, 141, 141, 0.16);
+  transform: translateY(-2px);
+}
+
+.author-social-tag-icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  flex-shrink: 0;
+  color: var(--c-teal);
+}
+.author-social-tag-icon svg { width: 100%; height: 100%; }
+
+/* ---------------------------------------------------------
+   باکس سرچ و تب‌ها
+--------------------------------------------------------- */
+.author-search-wrap {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+
+.author-search-wrap svg {
+  position: absolute;
+  top: 50%;
+  right: 1.1rem;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--c-deep);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.author-search-wrap input {
+  width: 100%;
+  padding: 0.8rem 2.8rem 0.8rem 1.2rem;
+  border-radius: 16px;
+  border: 1.5px solid rgba(12, 141, 141, 0.15);
+  background: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--c-ink);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.author-search-wrap input:focus {
+  outline: none;
+  border-color: var(--c-teal);
+  box-shadow: 0 0 0 4px rgba(12, 141, 141, 0.1);
+}
+
+.author-insta-tabs-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(12, 141, 141, 0.12);
+}
+
+.author-insta-tabs {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.author-tab {
+  position: relative;
+  z-index: 2;
+  padding: 0.8rem 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--c-deep);
+  opacity: 0.45;
+  transition: opacity 0.25s ease, color 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-tab.is-active {
+  opacity: 1;
+  color: var(--c-ink);
+}
+
+.tab-text {
+  display: inline-block;
+  position: relative;
+  pointer-events: none;
+}
+
+.author-tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--c-teal);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 1;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, width;
+}
+
+/* ---------------------------------------------------------
+   گرید عکس‌ها
+--------------------------------------------------------- */
+.author-pin-grid {
+  column-count: 2;
+  column-gap: 0.8rem;
+}
+
+.pin-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 0.8rem;
+  border-radius: var(--r-lg, 14px);
+  overflow: hidden;
+  background: #0d1a1a;
+  text-decoration: none;
+  box-shadow: 0 6px 18px -10px rgba(18, 84, 84, 0.35);
+}
+
+.pin-tile img, .pin-tile video {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.pin-tile:hover img, 
+.pin-tile:hover video,
+.pin-tile:active img, 
+.pin-tile:active video {
+  transform: scale(1.06);
+}
+
+.pin-tile-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.8rem;
+  z-index: 2;
+  background: linear-gradient(0deg, rgba(6, 14, 14, 0.88) 0%, rgba(6, 14, 14, 0.3) 60%, rgba(6, 14, 14, 0) 100%);
+  opacity: 1;
+}
+
+.pin-tile-title {
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* مخفی کردن بج پروژه/وبلاگ */
+.pin-tile-badge {
+  display: none !important;
+}
+
+.author-pin-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--c-deep);
+}
+.author-pin-empty svg { width: 40px; height: 40px; opacity: .4; margin-bottom: .8rem; }
+.author-pin-empty p { margin: 0; opacity: .7; font-size: .9rem; }
+
+.pin-load-more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* =========================================================
+   تغییرات ویژه دسکتاپ و لپ‌تاپ (Media Query >= 992px)
+   ========================================================= */
+@media (min-width: 992px) {
+  .author-page {
+    padding-top: 3rem;
+  }
+
+  .author-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .author-sidebar {
+    position: sticky;
+    top: 2rem;
+    z-index: 10;
+  }
+
+  .author-profile-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(12, 141, 141, 0.12);
+    border-radius: 28px;
+    padding: 2rem 1.6rem;
+    box-shadow: 0 10px 30px -15px rgba(18, 84, 84, 0.08);
+  }
+
+  .author-profile-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .author-avatar-square {
+    width: 130px;
+    height: 130px;
+    border-radius: 32px;
+  }
+
+  .author-meta-right {
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .author-name-wrap {
+    text-align: center;
+  }
+
+  .author-name {
+    font-size: 1.7rem;
+    white-space: normal;
+  }
+
+  .author-stats-row {
+    width: 100%;
+    padding: 0.8rem 0;
+    border-top: 1px solid rgba(12, 141, 141, 0.1);
+    border-bottom: 1px solid rgba(12, 141, 141, 0.1);
+  }
+
+  .stat-col:nth-child(1), .stat-col:nth-child(2) {
+    width: 50%;
+  }
+
+  .stat-count {
+    font-size: 1.45rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+
+  .author-bio-section {
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .author-social-tags {
+    justify-content: center;
+    margin-bottom: 0;
+  }
+
+  .author-social-tag {
+    flex: initial;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.82rem;
+  }
+
+  .author-pin-grid {
+    column-count: 3;
+    column-gap: 1.2rem;
+  }
+
+  .pin-tile {
+    margin-bottom: 1.2rem;
+  }
+
+  .pin-tile-overlay {
+    padding: 0.95rem;
+  }
+
+  .pin-tile-title {
+    font-size: 0.88rem;
+  }
+}
+/* =========================================================
+   افزوده‌های جدید: فعالیت اخیر، نشان‌های دستاورد، اشتراک‌گذاری
+   (فقط با پالت رنگی برند: ink / deep / teal / cyan / mist)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   خط «آخرین فعالیت»
+--------------------------------------------------------- */
+.author-recent-activity {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-deep);
+  opacity: 0.85;
+  margin: 0.7rem 0 1.1rem;
+}
+
+.author-recent-activity .activity-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-teal);
+  box-shadow: 0 0 0 3px rgba(12, 141, 141, 0.15);
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------
+   نشان‌های دستاورد (کوچک، افقی، خط‌شکن خودکار)
+--------------------------------------------------------- */
+.author-badges {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.85rem 0.7rem;
+  justify-content: center;
+  margin: 0 0 1.2rem;
+}
+
+.author-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  width: 52px;
+}
+
+.author-badge-icon {
+  position: relative;
+  overflow: hidden;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 6px 14px -6px rgba(18, 84, 84, 0.45);
+}
+
+.author-badge-icon svg {
+  position: relative;
+  z-index: 1;
+  width: 16px;
+  height: 16px;
+}
+
+.author-badge-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 45%);
+}
+
+.author-badge.tier-bronze .author-badge-icon {
+  background: linear-gradient(135deg, var(--c-ink), var(--c-deep));
+}
+
+.author-badge.tier-silver .author-badge-icon {
+  background: linear-gradient(135deg, var(--c-deep), var(--c-teal));
+}
+
+.author-badge.tier-gold .author-badge-icon {
+  background: linear-gradient(135deg, var(--c-teal), var(--c-cyan-2));
+}
+
+.author-badge.tier-diamond .author-badge-icon {
+  background: linear-gradient(135deg, var(--c-cyan-2), var(--c-cyan));
+  box-shadow: 0 0 0 3px rgba(0, 255, 255, 0.18), 0 6px 16px -6px rgba(18, 84, 84, 0.5);
+}
+
+.author-badge-label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  color: var(--c-deep);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.author-badge.tier-diamond .author-badge-label {
+  background: linear-gradient(90deg, var(--c-teal), var(--c-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* ---------------------------------------------------------
+   دکمه اشتراک‌گذاری
+--------------------------------------------------------- */
+/* ---------------------------------------------------------
+   دکمه اشتراک‌گذاری (هم‌شکل با تگ‌های شبکه اجتماعی)
+--------------------------------------------------------- */
+.author-share-btn.author-social-tag {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: #fff;
+  background: linear-gradient(90deg, var(--c-teal), var(--c-deep));
+}
+
+.author-share-btn.author-social-tag .author-social-tag-icon {
+  color: #fff;
+}
+
+.author-share-btn.author-social-tag:hover {
+  background: linear-gradient(90deg, var(--c-teal), var(--c-deep));
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------
+   نوتیفیکیشن کوچک (Toast) برای کپی لینک
+--------------------------------------------------------- */
+.resa-toast {
+  position: fixed;
+  bottom: 96px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: var(--c-ink);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: 999px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 80;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.35);
+  white-space: nowrap;
+}
+
+.resa-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

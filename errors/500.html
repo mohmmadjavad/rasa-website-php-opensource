@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خطای 500 — خطای داخلی سرور | رسا تیم</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/logo/logo-filled-cyan.svg" type="image/svg+xml">
+<link href="../assets/vendor/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet">
+<style>
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    font-family:"Vazirmatn","Segoe UI",sans-serif;
+    background:#08090a;
+    color:#eafffe;
+    min-height:100vh;
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+    padding:2rem 1.2rem;
+  }
+  #bgCanvas{ position:fixed; inset:0; z-index:0; opacity:.55; }
+
+  .glow{ position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0; }
+  .glow--a{ width:480px; height:480px; background:#00ffff; top:-160px; right:-120px; opacity:.26; animation:driftA 15s ease-in-out infinite; }
+  .glow--b{ width:420px; height:420px; background:#0c8d8d; bottom:-180px; left:-120px; opacity:.28; animation:driftB 17s ease-in-out infinite; }
+  .glow--c{ width:320px; height:320px; background:#7bfeff; top:38%; left:52%; opacity:.14; animation:driftC 21s ease-in-out infinite; }
+  @keyframes driftA{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-34px,44px) scale(1.16);} }
+  @keyframes driftB{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(34px,-34px) scale(1.12);} }
+  @keyframes driftC{ 0%,100%{ transform:translate(-50%,-50%) scale(1);} 50%{ transform:translate(-50%,-50%) scale(1.35);} }
+
+  .grain{
+    position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .card{
+    position:relative; z-index:2; max-width:560px; width:100%;
+    background:rgba(15,25,25,.55);
+    border:1px solid rgba(123,254,255,.16);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border-radius:28px; padding:2.8rem 2.3rem; text-align:center;
+    box-shadow:0 40px 100px rgba(0,0,0,.5);
+    animation:cardIn .8s cubic-bezier(.16,.84,.28,1) both;
+  }
+  .card::before{
+    content:""; position:absolute; inset:-1px; border-radius:inherit; padding:1px;
+    background:conic-gradient(from 0deg, transparent 0%, rgba(0,255,255,.55) 12%, transparent 28%, transparent 72%, rgba(123,254,255,.4) 88%, transparent 100%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    animation:rotateBorder 7s linear infinite; opacity:.75; pointer-events:none;
+  }
+  @keyframes rotateBorder{ to{ transform:rotate(360deg); } }
+  @keyframes cardIn{
+    0%{ opacity:0; transform:translateY(26px) scale(.97); filter:blur(8px); }
+    100%{ opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
+  }
+
+  .logo-wrap{ position:relative; width:64px; height:64px; margin:0 auto 1.5rem; display:flex; align-items:center; justify-content:center; }
+  .logo-wrap::before, .logo-wrap::after{
+    content:""; position:absolute; inset:0; border-radius:50%; border:1px solid rgba(0,255,255,.35);
+    animation:ping 3s ease-out infinite;
+  }
+  .logo-wrap::after{ animation-delay:1.5s; }
+  @keyframes ping{ 0%{ transform:scale(.75); opacity:.8; } 100%{ transform:scale(2); opacity:0; } }
+  .logo{ width:38px; height:38px; position:relative; z-index:1; opacity:.95; }
+
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.74rem; font-weight:700; letter-spacing:.03em; color:#7bfeff;
+    background:rgba(0,255,255,.08); border:1px solid rgba(123,254,255,.25);
+    border-radius:999px; padding:.35rem .9rem; margin-bottom:1.3rem;
+    animation:fadeUp .7s ease both; animation-delay:.15s;
+  }
+
+  .icon-wrap{
+    width:84px; height:84px; margin:0 auto 1.3rem;
+    display:flex; align-items:center; justify-content:center; border-radius:50%;
+    background:radial-gradient(circle at 50% 40%, rgba(0,255,255,.18), rgba(0,255,255,.02));
+    border:1px solid rgba(123,254,255,.25);
+    animation:fadeUp .7s ease both; animation-delay:.1s;
+  }
+  .icon-wrap svg{ width:40px; height:40px; }
+
+  .code{
+    font-size:clamp(3.2rem, 11vw, 5.2rem); font-weight:800; line-height:1;
+    background:linear-gradient(135deg, #7bfeff, #00ffff 45%, #0c8d8d);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    letter-spacing:.02em; margin-bottom:.4rem;
+    animation:codeReveal 1s cubic-bezier(.16,.84,.28,1) both; animation-delay:.05s;
+  }
+  @keyframes codeReveal{
+    0%{ opacity:0; transform:translateY(20px) scale(.94); filter:blur(8px); }
+    60%{ opacity:1; filter:blur(0); }
+    100%{ transform:translateY(0) scale(1); }
+  }
+
+  h1{
+    font-size:clamp(1.25rem, 3.6vw, 1.55rem); font-weight:700; color:#fff;
+    margin-bottom:.85rem; animation:fadeUp .7s ease both; animation-delay:.25s;
+  }
+  p.msg{
+    font-size:.96rem; line-height:2; color:#b9d9d8; max-width:430px; margin:0 auto 1.9rem;
+    animation:fadeUp .7s ease both; animation-delay:.32s;
+  }
+  @keyframes fadeUp{ 0%{ opacity:0; transform:translateY(14px); } 100%{ opacity:1; transform:translateY(0); } }
+
+  .dots{ display:flex; gap:.4rem; justify-content:center; margin-bottom:1.9rem; animation:fadeUp .7s ease both; animation-delay:.38s; }
+  .dots span{ width:7px; height:7px; border-radius:50%; background:#00ffff; opacity:.3; animation:pulse 1.4s ease-in-out infinite; }
+  .dots span:nth-child(2){ animation-delay:.2s; }
+  .dots span:nth-child(3){ animation-delay:.4s; }
+  @keyframes pulse{ 0%,100%{ opacity:.25; transform:scale(1); } 50%{ opacity:1; transform:scale(1.35); } }
+
+  .actions{ display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap; animation:fadeUp .7s ease both; animation-delay:.42s; }
+  .btn{
+    position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:.5rem;
+    font-weight:700; font-size:.87rem; border-radius:999px; padding:.75rem 1.7rem;
+    cursor:pointer; transition:transform .25s ease, box-shadow .25s ease; text-decoration:none;
+  }
+  .btn::after{
+    content:""; position:absolute; top:0; left:-60%; width:45%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.4), transparent);
+    transform:skewX(-20deg); transition:left .65s ease;
+  }
+  .btn:hover::after{ left:130%; }
+  .btn-primary{ background:linear-gradient(135deg, #0c8d8d, #00c9c9); color:#04211f; border:none; box-shadow:0 12px 28px rgba(0,255,255,.16); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(0,255,255,.26); }
+  .btn-ghost{ background:transparent; color:#b9d9d8; border:1px solid rgba(123,254,255,.25); }
+  .btn-ghost:hover{ border-color:rgba(123,254,255,.55); color:#eafffe; transform:translateY(-2px); }
+
+  .footer-note{ margin-top:2.1rem; font-size:.74rem; color:#5c8484; letter-spacing:.03em; animation:fadeUp .7s ease both; animation-delay:.5s; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; }
+  }
+  @media (max-width:480px){
+    .card{ padding:2.2rem 1.5rem; border-radius:22px; }
+  }
+
+</style>
+</head>
+<body>
+  <canvas id="bgCanvas"></canvas>
+  <div class="glow glow--a"></div>
+  <div class="glow glow--b"></div>
+  <div class="glow glow--c"></div>
+  <div class="grain"></div>
+
+  <main class="card">
+    <div class="logo-wrap">
+      <img class="logo" src="../assets/logo/logo-filled-cyan.svg" alt="رسا تیم">
+    </div>
+
+    <span class="eyebrow">⚠ خطای داخلی</span>
+
+    <div class="icon-wrap" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#7bfeff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2.5 18a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+    </div>
+
+    <div class="code">500</div>
+    <h1>یک مشکل پیش آمد</h1>
+    <p class="msg">یک خطای غیرمنتظره در سرور رخ داده. تیم فنی رسا در جریان قرار گرفته؛ لطفاً چند لحظه دیگر دوباره امتحان کنید.</p>
+    
+
+    <div class="actions">
+      <a class="btn btn-primary" href="../index.html">بازگشت به خانه</a><button class="btn btn-ghost" onclick="location.reload()">تلاش دوباره</button>
+    </div>
+
+    <div class="footer-note">رسا تیم</div>
+  </main>
+
+  <script>
+(function(){
+  var canvas = document.getElementById('bgCanvas');
+  if(!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var W, H, particles = [];
+  var COLORS = ['#00ffff','#7bfeff','#0c8d8d'];
+  var COUNT = window.innerWidth < 720 ? 30 : 60;
+
+  function resize(){
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function Particle(){
+    this.x = Math.random()*W;
+    this.y = Math.random()*H;
+    this.vx = (Math.random()-.5)*.22;
+    this.vy = (Math.random()-.5)*.22;
+    this.r = Math.random()*1.6+.6;
+    this.c = COLORS[Math.floor(Math.random()*COLORS.length)];
+  }
+  for(var i=0;i<COUNT;i++) particles.push(new Particle());
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<particles.length;i++){
+      var p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if(p.x<0||p.x>W) p.vx*=-1;
+      if(p.y<0||p.y>H) p.vy*=-1;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = p.c;
+      ctx.globalAlpha = .6;
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var a=particles[i], b=particles[j];
+        var dx=a.x-b.x, dy=a.y-b.y;
+        var dist = Math.sqrt(dx*dx+dy*dy);
+        if(dist<130){
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle = 'rgba(123,254,255,' + ((1-dist/130)*.2) + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    if(!reduceMotion) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+</script>
+</body>
+</html>

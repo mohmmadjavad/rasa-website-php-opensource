@@ -1,0 +1,320 @@
+/* =========================================================
+   style.css
+   استایل‌های مشترک بین همه صفحات سایت
+   شامل: متغیرهای پایه، ریست، پس‌زمینه سه‌بعدی، فوتر سایت
+   و دکمه‌های ثابت ناوبری پایین صفحه (nav-pill).
+   استایل‌های اختصاصی صفحه اصلی در index.css قرار دارند.
+   ========================================================= */
+
+   /* =========================================================
+      Cross-document View Transitions
+      باعث می‌شه هنگام رفتن از یک صفحه به صفحه دیگه (لینک‌های واقعی <a>)
+      مرورگر به‌جای جامپ ناگهانی، بین دو حالت انیمیشن نرم اجرا کنه.
+      ========================================================= */
+      @view-transition{
+        navigation: auto;
+       }
+    
+       :root{
+        --c-ink:      #171a1a;   
+        --c-deep:     #125454;   
+        --c-teal:     #0c8d8d;   
+        --c-cyan:     #00ffff;   
+        --c-cyan-2:   #7bfeff;   
+        --c-cyan-3:   #b9feff;   
+        --c-mist:     #f6fdff;   
+      
+        --bg-0: #0b0d0d;
+        --bg-1: var(--c-ink);
+      
+        --font-display: "Mahoor", "Vazirmatn", "Segoe UI", sans-serif;
+        --font-body: "Vazirmatn", "Segoe UI", sans-serif;
+      
+        --ease-signature: cubic-bezier(.16,.84,.28,1);
+      }
+      
+      *{ box-sizing:border-box; }
+      html,body{ margin:0; padding:0; }
+      
+      body{
+        background:var(--bg-1);
+        color:var(--c-mist);
+        font-family:var(--font-body);
+        direction:rtl;
+        overflow-x:hidden;
+        -webkit-font-smoothing:antialiased;
+      }
+      
+      a{ color:inherit; text-decoration:none; }
+      img{ max-width:100%; display:block; }
+      
+      ::selection{ background:var(--c-teal); color:var(--c-ink); }
+      
+      @media (prefers-reduced-motion: reduce){
+        *{ animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+      }
+      
+      /* =========================================================
+         Ambient WebGL backdrop (Three.js canvas)
+         ========================================================= */
+      #bg-canvas{
+        position:fixed;
+        inset:0;
+        width:100%;
+        height:100%;
+        z-index:0;
+        pointer-events:none;
+      }
+      
+      
+      /* =========================================================
+         Fixed bottom nav pill - Rounded Rectangle
+         ========================================================= */
+      .nav-pill{
+        position:fixed;
+        bottom:22px;
+        left:50%;
+        transform:translateX(-50%) translateY(24px);
+        z-index:40;
+        display:flex;
+        align-items:center;
+        gap:8px; 
+        padding:8px 16px;
+        border-radius:24px;
+        background:rgba(255,255,255,0.75);
+        border:1px solid rgba(0,0,0,0.06);
+        box-shadow:0 8px 30px rgba(0,0,0,0.2);
+        backdrop-filter:blur(14px) saturate(160%);
+        -webkit-backdrop-filter:blur(14px) saturate(160%);
+        opacity:0;
+        pointer-events:none;
+        transition:opacity .5s var(--ease-signature), transform .5s var(--ease-signature);
+      }
+      .nav-pill.is-visible{
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+        pointer-events:auto;
+      }
+      
+      .nav-item{
+        position:relative;
+        width:54px; 
+        height:54px; 
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:12px; 
+        color:#1a1a1a;
+        transition:all .3s ease;
+        padding:4px 0;
+        cursor:pointer;
+      }
+      .nav-item .nav-content{
+        position:relative;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:2px;
+        width:100%;
+        height:100%;
+      }
+      .nav-item svg{ 
+        width:22px; 
+        height:22px; 
+        flex-shrink:0;
+        color:#1a1a1a;
+        transition:color .3s ease;
+        display:block;
+      }
+      .nav-item .nav-label{
+        font-size:.55rem;
+        font-weight:500;
+        white-space:nowrap;
+        color:#1a1a1a;
+        transition:color .3s ease;
+        letter-spacing:0.02em;
+        line-height:1;
+        display:block;
+      }
+      
+      .nav-item .nav-ring{
+        position:absolute;
+        inset:0;
+        border-radius:12px; 
+        background:transparent;
+        transition:background .35s ease, box-shadow .35s ease;
+        z-index:-1;
+      }
+      
+      .nav-item:hover{ 
+        color:#000; 
+      }
+      .nav-item:hover .nav-label{
+        color:#000;
+      }
+      .nav-item:hover svg{
+        color:#000;
+      }
+      
+      /* حالت فعال - پس‌زمینه مشکی با متن سفید */
+      .nav-item.is-active{ 
+        color:#ffffff; 
+      }
+      .nav-item.is-active .nav-label{
+        color:#ffffff;
+      }
+      .nav-item.is-active svg{
+        color:#ffffff;
+      }
+      
+      .nav-item.is-active .nav-ring{
+        background:#1a1a1a;
+        box-shadow:0 4px 12px rgba(0,0,0,0.2);
+      }
+    
+      /* --- انیمیشن جابه‌جایی مستطیل مشکی فعال بین صفحات ---
+         نام ترنزیشن (view-transition-name) اینجا مستقیم با CSS روی
+         .nav-ring آیتم فعال ست می‌شود (نه با جاوااسکریپت بعد از
+         DOMContentLoaded). این خیلی مهمه چون در ناوبری بین-صفحه‌ای
+         (cross-document view transition) مرورگر باید همون فریم اول
+         صفحه‌ی جدید رو قبل از اجرای اسکریپت‌ها اسنپ‌شات بگیره؛ اگر
+         نام ترنزیشن با جاوااسکریپت (بعد از لود شدن دوباره‌ی کل صفحه و
+         منو) ست بشه، ممکنه این اسنپ‌شات دیرتر از موعد گرفته بشه و
+         انیمیشن اصلاً اجرا نشه یا بپره. با CSS، از همون لحظه‌ی اول
+         رندر (قبل از هر ری‌لودی) این نام آماده‌ست. */
+      .nav-item.is-active .nav-ring{
+        view-transition-name:nav-active-pill;
+      }
+    
+      /* --- سینک شدن سفید شدن آیکون/متن با حرکت باکس مشکی ---
+         به همون دلیل بالا، به‌جای اینکه سفید شدن آیکون و لیبل بخش
+         مقصد به‌صورت آنی (همراه با فید سریع کل صفحه) اتفاق بیفته،
+         یک نام ترنزیشن جدا روی محتوای آیتم فعال (آیکون + لیبل) هم
+         می‌ذاریم تا با همون مدت‌زمان و ایزینگِ خود باکس مشکی، هم‌زمان
+         حرکت/محو-ظاهر بشه؛ یعنی وقتی باکس داره وارد بخش می‌شه، آیکون و
+         متنش هم دقیقاً همراه با اون داره سفید می‌شه، نه بعد از رسیدن. */
+      .nav-item.is-active .nav-content{
+        view-transition-name:nav-active-content;
+      }
+    
+      ::view-transition-group(nav-active-pill),
+      ::view-transition-group(nav-active-content){
+        animation-duration:.6s;
+        animation-timing-function:var(--ease-signature);
+      }
+      ::view-transition-old(nav-active-pill),
+      ::view-transition-new(nav-active-pill),
+      ::view-transition-old(nav-active-content),
+      ::view-transition-new(nav-active-content){
+        animation-duration:.6s;
+        animation-timing-function:var(--ease-signature);
+        mix-blend-mode:normal;
+      }
+    
+      /* بقیه‌ی صفحه (fade پیش‌فرض کل داکیومنت) را ساده و سریع نگه می‌داریم
+         تا تمرکز روی حرکت مستطیل مشکی باشد نه محو شدن کل صفحه */
+      ::view-transition-old(root),
+      ::view-transition-new(root){
+        animation-duration:.18s;
+      }
+      
+      @media (min-width:900px){
+        .nav-pill{ 
+          gap:16px;            /* افزایش فاصله بین آیتم‌ها برای عرض بیشتر کل نوار */
+          padding:14px 32px;   /* افزایش پدینگ داخلی برای بزرگتر شدن کلی نوار */
+          bottom:32px;
+          border-radius:32px;  /* کمی گردی بیشتر تا با اندازه جدید هماهنگ باشد */
+        }
+        .nav-item{ 
+          width:80px;          /* افزایش عرض هر دکمه */
+          height:74px;         /* افزایش ارتفاع هر دکمه */
+          border-radius:18px; 
+          padding:8px 0;
+        }
+        .nav-item .nav-content{
+          gap:5px;             /* فاصله بین آیکون و لیبل */
+        }
+        .nav-item .nav-ring{ 
+          border-radius:18px; 
+        }
+        .nav-item svg{ 
+          width:30px;          /* آیکون بزرگتر */
+          height:30px; 
+        }
+        .nav-item .nav-label{ 
+          font-size:.75rem;    /* متن بزرگتر */
+        }
+      }
+      
+      
+      /* =========================================================
+         Footer
+         ========================================================= */
+      .site-footer{
+        position:relative;
+        z-index:5;
+        background:linear-gradient(180deg, rgba(23,26,26,0) 0%, var(--c-ink) 18%);
+        padding:5rem 6vw 6.5rem;
+      }
+      .footer-grid{
+        max-width:1200px;
+        margin:0 auto;
+        display:grid;
+        grid-template-columns:1.2fr 1fr 1fr;
+        gap:3rem;
+      }
+      @media (max-width:800px){
+        .footer-grid{ grid-template-columns:1fr; gap:2.4rem; text-align:center; }
+      }
+      
+      .footer-brand .logo-mark{ width:34px; margin-bottom:1rem; }
+      @media (max-width:800px){ .footer-brand .logo-mark{ margin-inline:auto; } }
+      .footer-brand h3{
+        font-family:var(--font-display);
+        font-weight:900;
+        font-size:1.4rem;
+        margin:0 0 .6rem;
+      }
+      .footer-brand p{
+        color:var(--c-cyan-3);
+        opacity:.75;
+        line-height:1.8;
+        font-size:.92rem;
+        max-width:320px;
+      }
+      @media (max-width:800px){ .footer-brand p{ margin-inline:auto; } }
+      
+      .footer-col h4{
+        font-size:.85rem;
+        color:var(--c-teal);
+        letter-spacing:.05em;
+        margin:0 0 1.1rem;
+        font-weight:600;
+      }
+      .footer-col ul{ list-style:none; margin:0; padding:0; display:grid; gap:.7rem; }
+      .footer-col a{
+        color:var(--c-cyan-3);
+        font-size:.92rem;
+        transition:color .25s ease;
+      }
+      .footer-col a:hover{ color:var(--c-cyan); }
+      
+      .footer-bottom{
+        max-width:1200px;
+        margin:3.5rem auto 0;
+        padding-top:1.6rem;
+        border-top:1px solid rgba(123,254,255,.12);
+        display:flex;
+        justify-content:space-between;
+        gap:1rem;
+        flex-wrap:wrap;
+        font-size:.8rem;
+        color:var(--c-teal);
+      }
+/* ---------------------------------------------------------
+   لینک به پروفایل عمومی از روی نام/عکس نویسنده یا عضو تیم
+   (کارت وبلاگ، چیپ تیم پروژه و ...) — main.js/data-author-link
+--------------------------------------------------------- */
+[data-author-link]{ cursor:pointer; }
+.team-avatar-link{ display:inline-flex; text-decoration:none; }
