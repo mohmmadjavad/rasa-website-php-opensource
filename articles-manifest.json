@@ -1,0 +1,20 @@
+{
+  "id": "/articles-app",
+  "name": "رسا تیم — وبلاگ‌ها",
+  "short_name": "وبلاگ‌ها رسا",
+  "description": "اپلیکیشن وبلاگ‌ها رسا تیم — مطالعه‌ی سریع‌تر و آفلاین وبلاگ‌ها.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "/articles.html?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#171a1a",
+  "theme_color": "#171a1a",
+  "icons": [
+    { "src": "/assets/logo/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/assets/logo/web-app-manifest-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/logo/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/assets/logo/web-app-manifest-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

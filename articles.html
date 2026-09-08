@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وبلاگ‌ها | رسا تیم</title>
+<meta name="description" content="وبلاگ‌ها رسا تیم؛ ایده‌ها، تجربه‌ها و روایت‌هایی که رسا بیان می‌شوند.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://rasateams.ir/articles.html">
+<meta property="og:site_name" content="رسا تیم">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:type" content="website">
+<meta property="og:title" content="وبلاگ‌ها | رسا تیم">
+<meta property="og:description" content="وبلاگ‌ها رسا تیم؛ ایده‌ها، تجربه‌ها و روایت‌هایی که رسا بیان می‌شوند.">
+<meta property="og:url" content="https://rasateams.ir/articles.html">
+<meta property="og:image" content="https://rasateams.ir/assets/logo/web-app-manifest-512x512.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="وبلاگ‌ها | رسا تیم">
+<meta name="twitter:description" content="وبلاگ‌ها رسا تیم؛ ایده‌ها، تجربه‌ها و روایت‌هایی که رسا بیان می‌شوند.">
+<meta name="twitter:image" content="https://rasateams.ir/assets/logo/web-app-manifest-512x512.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"خانه","item":"https://rasateams.ir/"},{"@type":"ListItem","position":2,"name":"وبلاگ‌ها"}]}</script>
+<link rel="icon" href="assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/logo/favicon-96x96.png" type="image/png" sizes="96x96">
+<link rel="shortcut icon" href="assets/logo/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logo/apple-touch-icon.png">
+<link rel="manifest" href="articles-manifest.json">
+<meta name="theme-color" content="#171a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="وبلاگ‌ها رسا">
+<link href="assets/vendor/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/articles.css">
+</head>
+<body>
+
+<!-- ================= نوتیف نصب اپلیکیشن وبلاگ‌ها (بعد از ۳۰ ثانیه حضور در صفحه) ================= -->
+<div class="pwa-install-toast" id="pwaInstallToast" role="dialog" aria-live="polite" hidden>
+  <img class="pwa-install-icon" src="assets/logo/web-app-manifest-192x192.png" alt="" aria-hidden="true">
+  <div class="pwa-install-text">
+    <strong>نصب اپ وبلاگ‌ها رسا تیم</strong>
+    <span>دسترسی سریع‌تر و آفلاین به وبلاگ‌ها، مستقیم از صفحه اصلی گوشی‌ات.</span>
+  </div>
+  <button type="button" class="pwa-install-btn" id="pwaInstallBtn">نصب</button>
+  <button type="button" class="pwa-install-close" id="pwaInstallClose" aria-label="بستن">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+</div>
+
+<!-- ================= هدر ثابت جستجو : با اسکرول مخفی می‌شود ================= -->
+<header class="search-header" id="searchHeader">
+  <div class="search-header-inner">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+    <input type="search" id="searchInput" placeholder="در وبلاگ‌ها جستجو کن...">
+  </div>
+</header>
+
+<main class="articles-page">
+
+  <!-- ================= هیرو : بنر عکس با عنوان روی آن ================= -->
+  <section class="blog-hero">
+    <div class="blog-hero-frame">
+      <img class="blog-hero-img" src="assets/img/blog main.webp" alt="وبلاگ رسا تیم" onerror="this.style.display='none'">
+      <h1 class="blog-hero-title">وبلاگ<br><span>رسا</span></h1>
+    </div>
+  </section>
+
+  <!-- ================= دسته‌بندی‌ها ================= -->
+  <section class="cat-section">
+    <div class="cat-head">
+      <h2>دسته‌بندی‌ها</h2>
+    </div>
+    <div class="cat-scroller" id="catScroller">
+      <!-- کارت‌های دسته‌بندی توسط articles.js تزریق می‌شوند -->
+      <div class="cat-skel"></div>
+      <div class="cat-skel"></div>
+      <div class="cat-skel"></div>
+    </div>
+  </section>
+
+  <!-- ================= جدیدترین‌ها : کارت‌های پشته‌ای ================= -->
+  <section class="stack-section">
+    <div class="stack-head">
+      <h2>جدیدترین‌ها</h2>
+      <p>   </p>
+    </div>
+    <div class="stack-wrap" id="stackWrap">
+      <div class="stack-skel"></div>
+    </div>
+  </section>
+
+  <!-- ================= برترین‌ها : پربازدیدترین وبلاگ‌ها (کارت‌های پشته‌ای) ================= -->
+  <section class="stack-section">
+    <div class="stack-head">
+      <h2>برترین‌ها</h2>
+      <p>   </p>
+    </div>
+    <div class="stack-wrap" id="topStackWrap">
+      <div class="stack-skel"></div>
+    </div>
+  </section>
+
+  <!-- ================= وبلاگ : لیست کامل وبلاگ‌ها ================= -->
+  <section class="blog-list-section">
+    <div class="blog-list-head">
+      <h2>وبلاگ</h2>
+    </div>
+    <div class="blog-list" id="blogList">
+      <div class="list-skel"></div>
+      <div class="list-skel"></div>
+      <div class="list-skel"></div>
+    </div>
+    <div class="articles-empty" id="articlesEmpty" style="display:none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3.5h9L19 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M9 12h6M9 16h6"/></svg>
+      <p id="articlesEmptyMsg">وبلاگی با این مشخصات پیدا نشد.</p>
+      <button id="clearFiltersBtn" class="pagination-btn">پاک‌کردن فیلترها</button>
+    </div>
+    <nav class="pagination" id="pagination" style="display:none;"></nav>
+  </section>
+
+</main>
+
+<nav class="nav-pill" aria-label="ناوبری اصلی">
+  <a class="nav-item" data-color="#00ffff" href="index.html">
+      <span class="nav-ring"></span>
+      <span class="nav-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>
+      <span class="nav-label">خانه</span></span>
+    </a>
+    <a class="nav-item" data-color="#7bfeff" href="about.html">
+      <span class="nav-ring"></span>
+      <span class="nav-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6.4 7-6.4s7 2.8 7 6.4"/></svg>
+      <span class="nav-label">درباره ما</span></span>
+    </a>
+    <a class="nav-item" data-color="#0c8d8d" href="projects.html">
+      <span class="nav-ring"></span>
+      <span class="nav-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="5.5" width="7" height="7" rx="1.2"/><rect x="3.5" y="15.5" width="7" height="7" rx="1.2"/><rect x="13.5" y="15.5" width="7" height="7" rx="1.2"/></svg>
+      <span class="nav-label">پروژه‌ها</span></span>
+    </a>
+    <a class="nav-item is-active" data-color="#b9feff" href="articles.html">
+      <span class="nav-ring"></span>
+      <span class="nav-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9L19 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1Z"/><path d="M9 12h6M9 16h6"/></svg>
+      <span class="nav-label">وبلاگ‌ها</span></span>
+    </a>
+    <a class="nav-item" data-color="#125454" href="contact.html">
+      <span class="nav-ring"></span>
+      <span class="nav-content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="1.6"/><path d="M4.5 7 12 13l7.5-6"/></svg>
+      <span class="nav-label">تماس با ما</span></span>
+    </a>
+  </nav>
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img class="logo-mark" src="assets/logo/logo-filled-cyan.svg" alt="نشان رسا تیم">
+      <h3>رسا تیم</h3>
+      <p>جایی که رویاها به شکل روشن و رسا بیان می‌شوند. این متن نمونه است و باید با معرفی واقعی برند جایگزین شود.</p>
+    </div>
+    <div class="footer-col">
+      <h4>صفحات</h4>
+      <ul>
+        <li><a href="index.html">خانه</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="projects.html">پروژه‌ها</a></li>
+        <li><a href="articles.html">وبلاگ‌ها</a></li>
+        <li><a href="contact.html">تماس با ما</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>ارتباط</h4>
+      <ul>
+        <li><a href="mailto:info@rasateams.ir">info@rasateams.ir</a></li>
+        <li><a href="#">اینستاگرام</a></li>
+        <li><a href="#">تلگرام</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© ۱۴۰۴ رسا تیم</span>
+    <span>ساخته‌شده با ❤ برای رویاهای رسا</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/articles.js"></script>
+<script src="js/pwa-install.js"></script>
+</body>
+</html>

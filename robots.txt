@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /rasa-manager/
+Disallow: /install/
+Disallow: /includes/
+Disallow: /errors/
+Disallow: /*?preview_token=
+Disallow: /*preview_token=
+Disallow: /search.html?
+
+Sitemap: https://rasateams.ir/sitemap.php
